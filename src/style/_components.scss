@@ -56,3 +56,31 @@
 .location-info {
     display: flex;
 }
+
+//info section {information section}
+
+.info-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10rem;
+
+    &__location-fields {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+    &__info-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    &__buttons {
+        display: flex;
+        gap: 1rem;
+    }
+}
+//input
+.input {
+    padding: 2rem 1rem;
+}
