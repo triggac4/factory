@@ -1,0 +1,58 @@
+//textfield
+
+.textfield {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+
+    &__input {
+        width: 100%;
+        font-size: 1rem;
+        display: flex;
+        gap: 1rem;
+        &-field {
+            width: 100%;
+            padding: 0.5rem;
+
+            &:focus {
+                outline: 1px solid $color-black;
+            }
+        }
+    }
+}
+//general button
+.btn {
+    cursor: pointer;
+    transform: scale(1);
+    box-shadow: none;
+    transition: transform 0.2s ease-in-out;
+    border: none;
+
+    &:hover {
+        transform: scale(1.1);
+        box-shadow: 1px 1px 4px rgba($color-black, 0.5);
+    }
+    &:active {
+        box-shadow: none;
+        transform: scale(1);
+    }
+}
+
+//text-reset-button
+.text-reset {
+    background-color: $color-transparent;
+}
+
+//main-button
+.main-button {
+    background-color: $color-primary-dark;
+    color: $color-white;
+    padding: 0.5rem;
+}
+
+//location information
+
+.location-info {
+    display: flex;
+}

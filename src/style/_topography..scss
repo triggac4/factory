@@ -1,0 +1,24 @@
+.textfield {
+    &__label {
+        font-weight: 700;
+        text-transform: capitalize;
+        font-size: 1.5rem;
+    }
+}
+
+.btn {
+    text-transform: capitalize;
+}
+
+.location-info {
+    &__title {
+        font-weight: normal;
+        font-size: inherit;
+    }
+}
+
+.error {
+    font-weight: normal;
+    font-size: inherit;
+    color: $color-error;
+}
