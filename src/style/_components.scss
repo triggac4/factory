@@ -58,7 +58,6 @@
 }
 
 //info section {information section}
-
 .info-section {
     display: flex;
     flex-direction: column;
@@ -83,4 +82,7 @@
 //input
 .input {
     padding: 2rem 1rem;
+}
+.map-section {
+    height: 100%;
 }
