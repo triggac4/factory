@@ -5,7 +5,7 @@ written with react
 
 ## how to set up 
 1. first things first you need to clone the repo.
-2. first steps successful all you need is npm install or npm i.
+2. first step is successful all you need is npm install or npm i.
 3. next get a `Google map api key` (this step is not compulsory you should see the map with a developer cover over it).
 4. if you got the key follow the next 3 steps.
 5. you need to navigate to `src/major-sections/map_section.jsx`
