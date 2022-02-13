@@ -1,21 +1,37 @@
-import React from "react";
+import React, { useState, useRef } from "react";
+import { useDispatch } from "react-redux";
+
 import TextField from "../components/textfield/location_textfield";
 import MainButton from "../components/button/main_buttons";
 import LocationInfo from "../components/locations-info";
+import DispatchHandler from "../utils/DispatchHandler";
 const InformationSection = () => {
-    let val = {};
+    const [location, setLocation] = useState({});
+    const resubmit = useRef(true);
+    const dispatch = useDispatch();
+    async function onSubmit() {
+        if (resubmit.current) {
+            resubmit.current = false;
+            await DispatchHandler.LoadingWrapper(
+                dispatch,
+                location,
+                DispatchHandler.getRoute
+            );
+        }
+        resubmit.current = true;
+    }
     function onChange(e) {
-        val = { ...val, [e.target.name]: e.target.value };
-        console.log(val);
+        const value = { [e.target.name]: e.target.value };
+        setLocation(value);
     }
 
     let startingProps = {
-        name: "starting",
+        name: "origin",
         label: "Starting Location",
         placeholder: "Enter Starting Location",
     };
     let dropOffProps = {
-        name: "drop-off",
+        name: "destination",
         label: "Drop-off Location",
         placeholder: "Enter Drop-off Location",
     };
@@ -32,7 +48,7 @@ const InformationSection = () => {
                     <LocationInfo title="total time" value={3000} />
                 </div>
                 <div className="info-section__buttons">
-                    <MainButton label="Submit" />
+                    <MainButton label="Submit" onClick={onSubmit} />
                     <MainButton label="reset" />
                 </div>
             </div>

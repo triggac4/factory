@@ -1,21 +1,22 @@
 const initialState = {
-    start: [],
-    end: [],
+    origin: [],
+    destination: [],
     current: [],
     loading: false,
-    error: null,
+    error: false,
 };
 
 export const fetch_location = "FETCH_LOCATION";
 export const set_loading = "SET_LOADING";
+export const set_error = "SET_ERROR";
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case fetch_location:
             return {
                 ...state,
-                start: action.payload.start,
-                end: action.payload.end,
+                origin: action.payload.origin,
+                destination: action.payload.destination,
                 current: action.payload.current,
                 error: action.payload.error,
             };
@@ -23,6 +24,11 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: action.payload,
+            };
+        case set_error:
+            return {
+                ...state,
+                error: action.payload,
             };
         default:
             return state;
