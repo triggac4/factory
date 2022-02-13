@@ -88,9 +88,13 @@ class DispatchHandler {
                 } else {
                     throw new Error("unknown status");
                 }
+            } else {
+                throw new Error("api call failed probably server 500 status");
             }
         } catch (e) {
-            throw e;
+            throw new Error(
+                e.message ?? "something went wrong when getting co-ordinate"
+            );
         }
     }
     static async getRoute(dispatch, { origin, destination }) {

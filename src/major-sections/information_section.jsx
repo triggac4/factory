@@ -29,7 +29,6 @@ const InformationSection = () => {
     function onChange(e, name = null) {
         console.log(e.target.name);
         const key = name ?? e.target.name;
-        console.log(location);
         const value = {
             ...location,
             [key]: name ? "" : e.target.value,
