@@ -3,9 +3,12 @@
     margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr 3fr;
-    grid-auto-rows: 100vh;
-}
-
-.map {
-    // background-color: green;
+    grid-template-rows: 100vh;
+    overflow-y: auto;
+    @media screen and (max-width: $media-laptop-small) {
+        & {
+            grid-template-columns: 1fr;
+            grid-template-rows: min-content 80vh;
+        }
+    }
 }

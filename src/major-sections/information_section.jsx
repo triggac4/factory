@@ -6,21 +6,25 @@ import MainButton from "../components/button/main_buttons";
 import LocationInfo from "../components/locations-info";
 import DispatchHandler from "../utils/DispatchHandler";
 import Error from "../components/error/error_component";
+
 const InformationSection = () => {
-    const [location, setLocation] = useState({});
+    const [location, setLocation] = useState({ origin: "", destination: "" });
     const resubmit = useRef(true);
     const dispatch = useDispatch();
     const state = useSelector((state) => state);
+
     async function onSubmit() {
-        if (resubmit.current) {
-            resubmit.current = false;
-            await DispatchHandler.LoadingWrapper(
-                dispatch,
-                location,
-                DispatchHandler.getRoute
-            );
+        if (location.origin.trim() && location.destination.trim()) {
+            if (resubmit.current) {
+                resubmit.current = false;
+                await DispatchHandler.LoadingWrapper(
+                    dispatch,
+                    location,
+                    DispatchHandler.getRoute
+                );
+            }
+            resubmit.current = true;
         }
-        resubmit.current = true;
     }
     function onChange(e, name = null) {
         console.log(e.target.name);
