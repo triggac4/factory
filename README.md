@@ -15,4 +15,7 @@ written with react
 for those who just want to see the api calls navigate to `src/utils/DispatchHandler.js`
 that's where all the api's are consumed still a few bugs but i'll find them.
 
+also if both textfield's are not filled the submit button will do nothing
+and if already processing another submission it is temporarily disabled
+
 ### note you are running on local host 3000 but that can be changed if you need to
