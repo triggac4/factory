@@ -1,8 +1,13 @@
-# Getting Started with Create React App
+# Locator
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+that displays location from your input
+written with react 
 
-## Available Scripts
+## how to set up 
+1. first things first you need to clone the repo
+2. first steps successful all you need is npm install or npm i 
+3. second to the last step `Google map api key`
+  -you need to navigate to `src/major-sections/map_section.jsx`
 
 In the project directory, you can run:
 
