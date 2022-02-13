@@ -61,7 +61,7 @@ class DispatchHandler {
             );
             if (response.status >= 200 && response.status < 300) {
                 const data = await response.json();
-                console.log(data);
+
                 if (data.status === "in progress") {
                     await DispatchHandler.fetchRoutes(
                         dispatch,
@@ -83,7 +83,6 @@ class DispatchHandler {
                         total_time: data.total_time,
                         total_distance: data.total_distance,
                     };
-                    console.log(data);
                     dispatch(fetchLocation(payload));
                     return;
                 } else {
