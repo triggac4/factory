@@ -1,14 +1,16 @@
 import React, { useState, useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import TextField from "../components/textfield/location_textfield";
 import MainButton from "../components/button/main_buttons";
 import LocationInfo from "../components/locations-info";
 import DispatchHandler from "../utils/DispatchHandler";
+import Error from "../components/error/error_component";
 const InformationSection = () => {
     const [location, setLocation] = useState({});
     const resubmit = useRef(true);
     const dispatch = useDispatch();
+    const state = useSelector((state) => state);
     async function onSubmit() {
         if (resubmit.current) {
             resubmit.current = false;
@@ -20,8 +22,14 @@ const InformationSection = () => {
         }
         resubmit.current = true;
     }
-    function onChange(e) {
-        const value = { [e.target.name]: e.target.value };
+    function onChange(e, name = null) {
+        console.log(e.target.name);
+        const key = name ?? e.target.name;
+        console.log(location);
+        const value = {
+            ...location,
+            [key]: name ? "" : e.target.value,
+        };
         setLocation(value);
     }
 
@@ -35,18 +43,37 @@ const InformationSection = () => {
         label: "Drop-off Location",
         placeholder: "Enter Drop-off Location",
     };
+    let infoComp = null;
+    if (state.error) {
+        infoComp = <Error value={state.error.message} />;
+    } else if (state.total_distance) {
+        infoComp = (
+            <>
+                <LocationInfo
+                    title="total distance"
+                    value={state.total_distance}
+                />
+                <LocationInfo title="total time" value={state.total_time} />
+            </>
+        );
+    }
     return (
         <section className="info-section">
             <div className="info-section__location-fields">
-                <TextField {...startingProps} onChange={onChange} />
-                <TextField {...dropOffProps} onChange={onChange} />
+                <TextField
+                    {...startingProps}
+                    onChange={onChange}
+                    showReset={location.origin}
+                />
+                <TextField
+                    {...dropOffProps}
+                    onChange={onChange}
+                    showReset={location.destination}
+                />
             </div>
 
             <div className="info-section__info-buttons">
-                <div className="info-section__info">
-                    <LocationInfo title="total distance" value={12000} />
-                    <LocationInfo title="total time" value={3000} />
-                </div>
+                <div className="info-section__info">{infoComp} </div>
                 <div className="info-section__buttons">
                     <MainButton label="Submit" onClick={onSubmit} />
                     <MainButton label="reset" />

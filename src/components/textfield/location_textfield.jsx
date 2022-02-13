@@ -8,10 +8,11 @@ const TextField = ({ name, label, placeholder, showReset, onChange }) => {
     const change = (e, reset = false) => {
         if (reset) {
             setValue("");
+            onChange(e, name);
         } else {
             setValue(e.target.value);
+            onChange(e);
         }
-        onChange(e);
     };
     return (
         <div className="textfield">

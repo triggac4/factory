@@ -8,7 +8,7 @@ class DispatchHandler {
             console.log("check");
         } catch (e) {
             console.warn(e);
-            dispatch(setError(true));
+            dispatch(setError(e));
         } finally {
             dispatch(setLoading(false));
         }
@@ -32,7 +32,7 @@ class DispatchHandler {
                 throw new Error("Something went wrong get token");
             }
         } catch (e) {
-            throw e;
+            throw new Error("something went wrong in Token call");
         }
     }
 
@@ -68,9 +68,14 @@ class DispatchHandler {
                         destination: data.path[1],
                         current: data.path[2],
                         error: false,
+                        total_time: data.total_time,
+                        total_distance: data.total_distance,
                     };
+                    console.log(data);
                     dispatch(fetchLocation(payload));
                     return;
+                } else {
+                    throw new Error("unknown status");
                 }
             }
         } catch (e) {

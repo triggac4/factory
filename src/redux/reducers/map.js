@@ -4,6 +4,8 @@ const initialState = {
     current: [],
     loading: false,
     error: false,
+    total_distance: 0,
+    total_time: 0,
 };
 
 export const fetch_location = "FETCH_LOCATION";
@@ -19,6 +21,8 @@ const reducer = (state = initialState, action) => {
                 destination: action.payload.destination,
                 current: action.payload.current,
                 error: action.payload.error,
+                total_distance: action.payload.total_distance,
+                total_time: action.payload.total_time,
             };
         case set_loading:
             return {
