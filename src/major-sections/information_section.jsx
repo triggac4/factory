@@ -44,7 +44,9 @@ const InformationSection = () => {
         placeholder: "Enter Drop-off Location",
     };
     let infoComp = null;
-    if (state.error) {
+    if (state.loading) {
+        infoComp = <h1>Loading... </h1>;
+    } else if (state.error) {
         infoComp = <Error value={state.error.message} />;
     } else if (state.total_distance) {
         infoComp = (
@@ -76,7 +78,12 @@ const InformationSection = () => {
                 <div className="info-section__info">{infoComp} </div>
                 <div className="info-section__buttons">
                     <MainButton label="Submit" onClick={onSubmit} />
-                    <MainButton label="reset" />
+                    <MainButton
+                        label="reset"
+                        onClick={() => {
+                            DispatchHandler.reset(dispatch);
+                        }}
+                    />
                 </div>
             </div>
         </section>

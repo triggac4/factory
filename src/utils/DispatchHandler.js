@@ -1,6 +1,18 @@
 import { fetchLocation, setLoading, setError } from "../redux/action/action";
 
 class DispatchHandler {
+    static async reset(dispatch) {
+        const payload = {
+            origin: [],
+            destination: [],
+            current: [],
+            error: false,
+            total_time: 0,
+            total_distance: 0,
+        };
+        dispatch(fetchLocation(payload));
+    }
+
     static async LoadingWrapper(dispatch, { origin, destination }, func) {
         dispatch(setLoading(true));
         try {
@@ -61,7 +73,7 @@ class DispatchHandler {
                     );
                     return;
                 } else if (data.status === "failure") {
-                    throw new Error("Something went wrong status: failure");
+                    throw new Error(data.error);
                 } else if (data.status === "success") {
                     const payload = {
                         origin: data.path[0],

@@ -1,37 +1,48 @@
-import React, { useState } from "react";
+import React from "react"; //{ useState }
 import {
     GoogleMap,
     LoadScript,
     Marker,
-    DirectionsRenderer,
-    DirectionsService,
-    Polyline,
+    // DirectionsRenderer,
+    // DirectionsService,
+    // Polyline,
 } from "@react-google-maps/api";
+import { useSelector } from "react-redux";
+
 const MapSection = () => {
-    const [responses, setResponse] = useState(null);
+    // const [responses, setResponse] = useState(null);
+    // function callback(response) {
+    //     if (!responses) {
+    //         if (response !== null) {
+    //             if (response.status === "OK") {
+    //                 console.log("response", response);
+    //                 setResponse(response);
+    //             } else {
+    //                 console.log("response-error: ", response);
+    //             }
+    //         }
+    //     }
+    // }
+    const state = useSelector((state) => state);
 
-    function callback(response) {
-        if (!responses) {
-            if (response !== null) {
-                if (response.status === "OK") {
-                    console.log("response", response);
-                    setResponse(response);
-                } else {
-                    console.log("response-error: ", response);
-                }
-            }
-        }
-    }
-
+    const origin = state.origin.length
+        ? { lat: state.origin[0] - 0, lng: state.origin[1] - 0 }
+        : { lat: 22.372081, lng: 114.107877 };
+    const destination = state.destination.length
+        ? { lat: state.destination[0] - 0, lng: state.destination[1] - 0 }
+        : { lat: 22.372081, lng: 114.107877 };
+    const current = state.origin.length
+        ? { lat: state.current[0] - 0, lng: state.current[1] - 0 }
+        : { lat: 22.372081, lng: 114.107877 };
     return (
         <section className="map-section">
             <LoadScript googleMapsApiKey={process.env.API_KEY}>
                 <GoogleMap
                     mapContainerStyle={{ height: "100%", width: "100%" }}
-                    center={{ lat: 9.0765, lng: 7.3986 }}
+                    center={origin}
                     zoom={12}
                 >
-                    <DirectionsService
+                    {/* <DirectionsService
                         options={{
                             destination: {
                                 lat: 9.0765,
@@ -71,17 +82,10 @@ const MapSection = () => {
                                 path={responses.routes[0].overview_path}
                             />
                         </>
-                    ) : null}
-                    <Marker
-                        position={{ lat: 22.372081, lng: 114.107877 }}
-                        id="1"
-                        label="A"
-                    />
-                    <Marker
-                        position={{ lat: 22.326442, lng: 114.167811 }}
-                        id="2"
-                        label="B"
-                    />
+                    ) : null} */}
+                    <Marker position={origin} id="1" label="A" />
+                    <Marker position={destination} id="2" label="B" />
+                    <Marker position={current} id="2" label="C" />
                 </GoogleMap>
             </LoadScript>
         </section>
